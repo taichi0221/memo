@@ -52,6 +52,7 @@ index: true                 # インデックスを作成する　データの�
 1.頻繁にデータが追加・更新されるカラム
 2.カラム内のデータの種類が非常に少ない場合（例：真偽値を持つカラム）
 3.検索やソートがほとんど行われないカラム
+
 ## form_with
 <%= form_with model: @question, url: questions_path ,local: true do |f| %>
   <div id ="after_submit" >
@@ -81,6 +82,20 @@ link_to メソッドを使用
 new_question_path リンク先
 class: 'btn btn-outline-secondary' CSSクラスを追加。この例では、btn と btn-outline-secondary の2つのクラスが適用され、Bootstrap のスタイルが適用されることで、ボタンの見た目が整えられます。
 type: 'button' リンクがボタンとして機能することを明示的に示す目的で使用
+
+## image_tag
+<%= link_to "https://github.com/taichi0221", target: "_blank" do %>
+  <%= image_tag("https://grass-graph.appspot.com/images/taichi0221.png?", class: "img-fluid") %>
+<% end %>
+"https://github.com/taichi0221" リンク先
+target: "_blank" 新しいタブで開く
+image_tagは、指定されたURLの画像を表示するためのHTMLの<img>タグを生成。
+例では、https://grass-graph.appspot.com/images/taichi0221.png? というURLの画像が表示。
+URLは、GitHubのコントリビューションカレンダーを画像として取得できるサービスである Grass-graph によって提供されています。このサービスは、GitHubユーザー名を指定することで、そのユーザーのコントリビューションカレンダーを画像として生成してくれます。ここでは、ユーザー名 "taichi0221" が指定されているため、そのユーザーのコントリビューションカレンダーが表示されます。
+<%= image_tag("https://free-icons.net/wp-content/uploads/2021/02/symbol052.png", alt: "Symbol Icon", class: "icon-class") %>
+"https://free-icons.net/wp-content/uploads/2021/02/symbol052.png"リンク先
+alt: "Symbol Icon" 画像の説明
+class: "icon-class" CSSのクラス指定
 
 ## RSpecテスト
 gem 'rspec-rails', '~> 4.0.0'
