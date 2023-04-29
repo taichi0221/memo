@@ -7,6 +7,7 @@ touch Gemfile
 touch Gemfile.lock
 touch entrypoint.sh
 touch Dockerfile
+touch my.cnf
 touch env
 code .
 
@@ -20,58 +21,7 @@ rm -f /myapp/tmp/pids/server.pid
 # Then exec the container's main process (what's set as CMD in the Dockerfile).
 exec "$@"
 
---dockerfile
-FROM ruby:2.6.5
 
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-  && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
-  && apt-get update -qq \
-  && apt-get install -y yarn
-
-WORKDIR /myapp
-COPY Gemfile /myapp/Gemfile
-COPY Gemfile.lock /myapp/Gemfile.lock
-RUN bundle install
-
-COPY . /myapp
-
-COPY entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
-EXPOSE 3000
-
-CMD ["rails", "server", "-b", "0.0.0.0"]
-
---gemfile
-source 'https://rubygems.org'
-gem 'rails', '6.0.0'
-gem 'mysql2'
-
---docker compose.yml
-version: '3.8'
-services:
-  web:
-    build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    volumes:
-      - .:/myapp
-    ports:
-      - "3000:3000"
-    depends_on:
-      - db
-    env_file:
-      - env
-
-  db:
-    image: mysql:8.0
-    env_file:
-      - env
-    volumes:
-      - db-data:/var/lib/mysql
-
-volumes:
-  db-data:
 
 
 
