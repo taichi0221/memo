@@ -1,3 +1,25 @@
+# Docker Compose コマンド集
+## 設定ファイルを元にコンテナのビルド・起動
+docker-compose up -d
+## コンテナの停止・削除
+docker-compose down
+## サービス一覧の表示
+docker-compose ps
+## コンテナのログを表示
+docker-compose logs [サービス名]
+## コンテナ内のコマンドを実行
+docker-compose exec [サービス名] [コマンド]
+## 本番環境用のDocker ComposeでRailsアプリケーションのproductionログをリアルタイム表示
+docker-compose -f docker-compose.production.yml exec rails tail -f log/production.log
+## Dockerコンテナにインタラクティブシェルで接続
+docker exec -it コンテナID bash
+## 本番環境用のDocker ComposeでRailsアプリケーションにsass-loader@10を追加
+docker-compose -f docker-compose.production.yml exec rails yarn add sass-loader@10
+## 本番環境用のDocker ComposeでRailsアプリケーションのWebpackを実行
+docker-compose -f docker-compose.production.yml exec rails bin/webpack
+## 本番環境用のDocker ComposeでRailsアプリケーションのアセットを事前コンパイル
+docker-compose -f docker-compose.production.yml exec rails bundle exec rails assets:precompile
+
 # Docker コマンド集
 ## イメージのビルド
 docker build -t [イメージ名]:[タグ名] [Dockerfileがあるディレクトリ]

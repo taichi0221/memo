@@ -1,31 +1,36 @@
 ## 新規Railsプロジェクト作成
 rails new [プロジェクト名] -d [データベース名]
-## サーバー起動
-rails s
-## データベース作成
-rails db:create
-## マイグレーション
-rails db:migrate
 ## モデル生成
 rails g model [モデル名]
 ## コントローラー生成
 rails g controller [コントローラー名]
-## コンソール起動
-rails c
 ## RSpecテスト実行
-bundle exec rspec
-## RSpecテスト実行 (特定のファイル)
-bundle exec rspec [ファイルパス]
-## RSpecテスト実行 (特定の行)
-bundle exec rspec [ファイルパス]:[行番号]
+gem 'rspec-rails', '~> 4.0.0'
+bundle
+rails g rspec:install
+--format documentation .rspecに追記テストコードの結果を可視化
+rails g rspec:model user user部分はモデル名
+bundle exec rspec spec/models/user_spec.rb user_spec.rbはファイル名
+## factory_bot
+gem 'factory_bot_rails'
+bundle
+spec/mkdir factories/mk users.rb users部分はモデル名s
+FactoryBot.define do
+  factory :user do
+    nickname              {Faker::Name.initials(number: 2)}
+    email                 {Faker::Internet.free_email}
+    password              {Faker::Internet.password(min_length: 6)}
+    password_confirmation {password}
+  end
+end
+## faker
+gem 'faker'
+bundle
 
-# Pryコマンド集
-## ブレークポイントを設定 (コードに挿入)
+## Pryコマンド集
 binding.pry
-## Pryのセッションから抜ける
+user.errors.full_messages user部分はmodel名に合わせる
 exit
-## 変数やメソッドの情報を表示
-ls
 ## オブジェクトのメソッドを表示
 methods
 ## オブジェクトのインスタンス変数を表示
