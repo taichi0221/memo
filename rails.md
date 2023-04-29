@@ -92,6 +92,7 @@ target: "_blank" 新しいタブで開く
 image_tagは、指定されたURLの画像を表示するためのHTMLの<img>タグを生成。
 例では、https://grass-graph.appspot.com/images/taichi0221.png? というURLの画像が表示。
 URLは、GitHubのコントリビューションカレンダーを画像として取得できるサービスである Grass-graph によって提供されています。このサービスは、GitHubユーザー名を指定することで、そのユーザーのコントリビューションカレンダーを画像として生成してくれます。ここでは、ユーザー名 "taichi0221" が指定されているため、そのユーザーのコントリビューションカレンダーが表示されます。
+
 <%= image_tag("https://free-icons.net/wp-content/uploads/2021/02/symbol052.png", alt: "Symbol Icon", class: "icon-class") %>
 "https://free-icons.net/wp-content/uploads/2021/02/symbol052.png"リンク先
 alt: "Symbol Icon" 画像の説明
