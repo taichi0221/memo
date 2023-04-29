@@ -17,7 +17,8 @@ gem 'devise'
 bundle
 rails g devise:install
 rails g devise user
-## migrate
+rails g devise:views
+## マイグレーションファイル
 t.string     :name,         null: false
 t.text       :explanation,  null: false
 t.references :user,         null: false, foreign_key: true
@@ -51,6 +52,28 @@ index: true                 # インデックスを作成する　データの�
 1.頻繁にデータが追加・更新されるカラム
 2.カラム内のデータの種類が非常に少ない場合（例：真偽値を持つカラム）
 3.検索やソートがほとんど行われないカラム
+## form_with
+<%= form_with model: @question, url: questions_path ,local: true do |f| %>
+  <div id ="after_submit" >
+    <h2>プロフィール入力</h2>
+    <%= f.label :language, 'プログラミング言語' %>
+    <%= f.text_field :language, id: "language_input",class: "form-control", placeholder: "得意なプログラミング言語を入力してください" %>
+    <%= f.label :framework, 'フレームワーク'%>
+    <%= f.text_field :framework, id: "framework_input",class: "form-control", placeholder: "得意なフレームワークを入力してください" %>
+    <%= f.label :hobby, '趣味' %>
+    <%= f.text_field :hobby, id: "hobby_input", class: "form-control", placeholder: "趣味を入力してください" %> 
+    <%= f.label :former_job ,'経験したお仕事（任意）'%>
+    <%= f.text_field :former_job, class: "form-control", placeholder: "前職を入力してください" %> 
+    <%= f.submit "聞く！", class: "btn btn-primary", id: "submit", style: "display:none;"%>
+  </div>
+<% end %>
+
+form_with メソッドを使用してフォームを開始。
+model: インスタンス変数 url: フォーム送信後のURL local: true Ajaxを無効にし、通常のHTTPリクエストを行う設定。
+f.label と f.text_field 各入力フィールドのラベルとテキストフィールドを作成。
+id, class, placeholder フォームの見た目や振る舞いをカスタマイズ。
+f.submit フォームの送信ボタンを作成。
+
 ## RSpecテスト
 gem 'rspec-rails', '~> 4.0.0'
 bundle
