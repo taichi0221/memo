@@ -74,6 +74,14 @@ f.label と f.text_field 各入力フィールドのラベルとテキストフ�
 id, class, placeholder フォームの見た目や振る舞いをカスタマイズ。
 f.submit フォームの送信ボタンを作成。
 
+## link_to
+<%= link_to "プロフィール入力", new_question_path, class: 'btn btn-outline-secondary', type: 'button' %>
+link_to メソッドを使用
+"プロフィール入力" テキストのリンクを作成。
+new_question_path リンク先
+class: 'btn btn-outline-secondary' CSSクラスを追加。この例では、btn と btn-outline-secondary の2つのクラスが適用され、Bootstrap のスタイルが適用されることで、ボタンの見た目が整えられます。
+type: 'button' リンクがボタンとして機能することを明示的に示す目的で使用
+
 ## RSpecテスト
 gem 'rspec-rails', '~> 4.0.0'
 bundle
