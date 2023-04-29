@@ -4,6 +4,19 @@ rails new [プロジェクト名] -d [データベース名]
 rails g model [モデル名]
 ## コントローラー生成
 rails g controller [コントローラー名]
+## routes.rb
+Rails.application.routes.draw do
+  devise_for :users
+    root to: 'items#index'
+    resources :items  do
+      resources :buys, only: [:new, :create]
+    end
+end
+## gem 'devise'
+gem 'devise'
+bundle
+rails g devise:install
+rails g devise user
 ## RSpecテスト実行
 gem 'rspec-rails', '~> 4.0.0'
 bundle
