@@ -83,11 +83,10 @@ COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock
 RUN bundle install
 
-# Yarnパッケージのインストール
-COPY app/package.json app/yarn.lock /myapp/app/
-WORKDIR /myapp/app
-RUN yarn install
-WORKDIR /myapp
+# COPY app/package.json app/yarn.lock /myapp/app/
+# WORKDIR /myapp/app
+# RUN yarn install
+# WORKDIR /myapp
 
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
@@ -103,7 +102,8 @@ gem 'rails', '6.0.0'
 
 
 ----------ターミナル------------
-docker-compose run --no-deps app rails new . --force --database=mysql --skip-test --skip-spring
+docker-compose run --no-deps app rails new . --force --database=mysql --skip-test --skip-spring --webpack
+
 
 pwd
 pwdの結果
@@ -121,14 +121,13 @@ default: &default
   password:
   host: db
 
+コメントアウト外す
 
 --------ターミナル------------
 docker-compose run app rails db:create
 docker-compose up
-
-
-
-
+rm -rf app/.git
+git init
 
 
 
