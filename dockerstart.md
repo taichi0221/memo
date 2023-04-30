@@ -24,7 +24,7 @@ exec "$@"
 
 
 
-
+sudo chown -R taichi:taichi /home/taichi/dockertest
 
 
 
